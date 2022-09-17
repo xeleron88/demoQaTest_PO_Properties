@@ -69,8 +69,7 @@ public class TestStudentRegistrationForm {
                 text(hobbie),
                 text(picture),
                 text(adress),
-                text(state + " " + city)
-                );
+                text(state + " " + city));
     }
 
 }
