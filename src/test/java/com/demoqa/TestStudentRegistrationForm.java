@@ -1,12 +1,13 @@
 package com.demoqa;
 
 import com.codeborne.selenide.Configuration;
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.*;
 
 public class TestStudentRegistrationForm {
 
@@ -19,13 +20,57 @@ public class TestStudentRegistrationForm {
 
     @Test
     void fillFormTest() {
-        String firstName = "Egor";
-        String lastName = "Petrov";
-        String email = "Petrov@egor.com";
-        String subjects = "coding";
-        String adress = "Kremlin";
+        Faker faker = new Faker();
+
+        String firstName = faker.name().firstName();
+        String lastName = faker.name().lastName();
+        String email = faker.internet().emailAddress();
+        String gender = "Male";
+        String phoneNumber = faker.phoneNumber().subscriberNumber(10);
+        String date = "16";
+        String month = "November";
+        String year = "1988";
+        String subjects = "English";
+        String hobbie = "Reading";
+        String picture = "cat.jpg";
+        String adress = faker.address().streetAddress();
+        String state = "Haryana";
+        String city = "Karnal";
 
         open("/automation-practice-form");
+        $("#firstName").setValue(firstName);
+        $("#lastName").setValue(lastName);
+        $("#userEmail").setValue(email);
+        $$(".custom-radio").findBy(text(gender)).click();
+        $("#userNumber").setValue(phoneNumber);
+        $("#dateOfBirthInput").click();
+        $(".react-datepicker__month-select").selectOption(month);
+        $(".react-datepicker__year-select").selectOption(year);
+        $(".react-datepicker__day--0"+date).click();
+        $("#subjectsInput").setValue(subjects).pressEnter();
+        $$(".custom-control-label").findBy(text(hobbie)).click();
+        $("#uploadPicture").uploadFromClasspath(picture);
+        $("#currentAddress").setValue(adress);
+        $("#state").click();
+        $(byText(state)).click();
+        $("#city").click();
+        $(byText(city)).click();
+        $("#submit").click();
+
+        // validation of data
+        $(".modal-header").shouldHave(text("Thanks for submitting the form"));
+
+        $(".table-responsive").shouldHave(text(firstName + " " + lastName),
+                text(email),
+                text(gender),
+                text(phoneNumber),
+                text(date + " " + month + "," + year),
+                text(subjects),
+                text(hobbie),
+                text(picture),
+                text(adress),
+                text(state + " " + city)
+                );
     }
 
 }
