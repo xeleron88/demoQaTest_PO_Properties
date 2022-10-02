@@ -2,9 +2,10 @@ package com.demoqa.tests;
 
 import com.codeborne.selenide.Configuration;
 import com.demoqa.pages.PracticeFormPage;
-import com.github.javafaker.Faker;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import static com.demoqa.utils.UserDataGenerateUtils.*;
 
 public class PracticeFormTests {
     PracticeFormPage practiceFormPage = new PracticeFormPage();
@@ -19,24 +20,6 @@ public class PracticeFormTests {
 
     @Test
     void fillFormTest() {
-        Faker faker = new Faker();
-
-        String url = "/automation-practice-form";
-        String firstName = faker.name().firstName();
-        String lastName = faker.name().lastName();
-        String email = faker.internet().emailAddress();
-        String gender = "Male";
-        String phoneNumber = faker.phoneNumber().subscriberNumber(10);
-        String day = "16";
-        String month = "November";
-        String year = "1988";
-        String subjects = "English";
-        String hobbie = "Reading";
-        String picture = "cat.jpg";
-        String adress = faker.address().streetAddress();
-        String state = "Haryana";
-        String city = "Karnal";
-
         practiceFormPage.openPage(url)
                 .setFirstName(firstName)
                 .setLastName(lastName)
