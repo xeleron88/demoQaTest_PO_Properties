@@ -12,6 +12,9 @@ public class PracticeFormPage {
     private final CalendarComponent calendarComponent = new CalendarComponent();
     public PracticeFormPage openPage(String url) {
         open(url);
+        $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
+        executeJavaScript("$('footer').remove()");
+        executeJavaScript("$('#fixedban').remove()");
 
         return this;
     }
