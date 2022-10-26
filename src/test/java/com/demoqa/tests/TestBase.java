@@ -24,7 +24,7 @@ public class TestBase {
         Configuration.browser = Property.browser();
         Configuration.browserVersion = Property.browserVersion();
         Configuration.browserSize = Property.browserSize();
-        if (Property.remoteUrl() != null) {
+        if (!Property.remoteUrl().equals("")) {
             Configuration.remote = Property.remoteUrl();
         }
     }

@@ -10,7 +10,6 @@ public class PracticeFormTests extends TestBase {
     PracticeFormPage practiceFormPage = new PracticeFormPage();
     PracticeFormPage checkTableElement = new PracticeFormPage();
 
-
     @Test
     void fillFormTest() {
 
