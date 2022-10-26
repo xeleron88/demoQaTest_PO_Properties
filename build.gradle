@@ -44,5 +44,3 @@ tasks.withType(Test) {
         }
     }
 }
-
-test {}
