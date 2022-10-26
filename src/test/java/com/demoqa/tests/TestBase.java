@@ -22,9 +22,10 @@ public class TestBase {
         Configuration.browserCapabilities = capabilities;
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browser = Property.browser();
+        Configuration.browserVersion = Property.browserVersion();
         Configuration.browserSize = Property.browserSize();
-        if (Property.isRemote()) {
-            Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        if (Property.remoteUrl() != null) {
+            Configuration.remote = Property.remoteUrl();
         }
     }
 
